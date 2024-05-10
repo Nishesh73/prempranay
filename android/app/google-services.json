@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "659336804845",
+    "project_id": "my-prem-pranay",
+    "storage_bucket": "my-prem-pranay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659336804845:android:09d1efd62d39190c920fe4",
+        "android_client_info": {
+          "package_name": "com.example.prempranay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlul2hPov8KN2mDJHSOb58VdLnqkbiUMY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
