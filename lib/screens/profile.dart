@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prempranay/screens/profilecard.dart';
+import 'package:prempranay/screens/profiledetail.dart';
 import 'package:prempranay/util.dart';
 import 'package:uuid/uuid.dart';
 
@@ -160,10 +161,16 @@ postToFireBase()async{
     return Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           "Profile",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+
+
+       
+
+        
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),

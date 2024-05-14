@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:prempranay/screens/profilecardwidget.dart';
@@ -10,7 +11,8 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection("posts").snapshots(),
+          stream: FirebaseFirestore.instance.collection("posts")
+          .where("userId", isNotEqualTo: FirebaseAuth.instance.currentUser?.uid).snapshots(),
           builder: (context, asyncSnap) {
             if (asyncSnap.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());

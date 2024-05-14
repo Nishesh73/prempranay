@@ -1,9 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:prempranay/screens/profiledetail.dart';
-class ProfileCardWidget extends StatelessWidget {
+class ProfileCardWidget extends StatefulWidget {
   var snap;
   ProfileCardWidget({super.key, required this.snap});
+
+  @override
+  State<ProfileCardWidget> createState() => _ProfileCardWidgetState();
+}
+
+class _ProfileCardWidgetState extends State<ProfileCardWidget> {
+
+  
+
+
+      profileLiked(){
+        //if profile liked
+
+
+
+
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +40,7 @@ class ProfileCardWidget extends StatelessWidget {
               children:[ SizedBox(
                 width: double.maxFinite,
                 height: MediaQuery.of(context).size.height* .8, 
-                child: Image.network(snap.get("imageUrl", ),
+                child: Image.network(widget.snap.get("imageUrl", ),
                 fit: BoxFit.fill,
                 
                 ),
@@ -37,12 +54,12 @@ class ProfileCardWidget extends StatelessWidget {
                   children: [
                   Row(
                     children: [
-                      Text(snap.get("name"), style: TextStyle(fontSize: 25.0, fontWeight:FontWeight.bold),),
-                      Text(", ${snap.get("age")}", style: TextStyle(fontSize: 25.0,)),
+                      Text(widget.snap.get("name"), style: TextStyle(fontSize: 25.0, fontWeight:FontWeight.bold),),
+                      Text(", ${widget.snap.get("age")}", style: TextStyle(fontSize: 25.0,)),
                     ],
                   ),
                 
-                  Text(snap.get("location")),
+                  Text(widget.snap.get("location")),
                 
                 ],),
               )
@@ -58,7 +75,11 @@ class ProfileCardWidget extends StatelessWidget {
             IconButton(onPressed: (){}, icon: Icon(Icons.thumb_down,
             color: Colors.red,
             )),
-             IconButton(onPressed: (){}, icon: Icon(Icons.thumb_up,
+             IconButton(onPressed: (){
+              profileLiked();
+
+
+             }, icon: Icon(Icons.thumb_up,
              color: Colors.green,
              
              ))
@@ -68,7 +89,7 @@ class ProfileCardWidget extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: MaterialButton(onPressed: (){
 
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileDetail(snap: snap)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileDetail(snap: widget.snap)));
         },
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         color: Colors.white,
