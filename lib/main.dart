@@ -39,8 +39,8 @@ class MyApp extends StatelessWidget {
 
           if(asyncsnap.hasData){
 
-            // return Profile();
-            return ProfileCard();
+            return Profile();
+            // return ProfileCard();
           }
 
        return  SignUp();

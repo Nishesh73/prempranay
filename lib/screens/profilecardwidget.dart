@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:prempranay/screens/profiledetail.dart';
 class ProfileCardWidget extends StatefulWidget {
   var snap;
-  ProfileCardWidget({super.key, required this.snap});
+  VoidCallback like;
+  VoidCallback unlike;
+  ProfileCardWidget({super.key, required this.snap, required this.like, required this.unlike});
 
   @override
   State<ProfileCardWidget> createState() => _ProfileCardWidgetState();
@@ -13,14 +15,6 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
 
   
 
-
-      profileLiked(){
-        //if profile liked
-
-
-
-
-      }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +65,18 @@ class _ProfileCardWidgetState extends State<ProfileCardWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               
-           
-            IconButton(onPressed: (){}, icon: Icon(Icons.thumb_down,
+           //important note 
+        //  When you write ElevatedButton(onPressed: widget.like)-means we pass the like as
+        //reference of function, but ElevatedButton(onPressed: () { widget.like(); })--here 
+        //we creat annonymous function which will run like()function when user press button
+        //both are valid little bit aware on syntax thats it
+            IconButton(onPressed:  widget.unlike
+            , icon: Icon(Icons.thumb_down,
             color: Colors.red,
             )),
-             IconButton(onPressed: (){
-              profileLiked();
+             IconButton(onPressed: widget.like
 
-
-             }, icon: Icon(Icons.thumb_up,
+             , icon: Icon(Icons.thumb_up,
              color: Colors.green,
              
              ))

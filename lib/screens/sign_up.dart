@@ -1,8 +1,11 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:prempranay/screens/profile.dart';
+import 'package:prempranay/screens/profilecard.dart';
+import 'package:prempranay/screens/profilecardwidget.dart';
 import 'package:prempranay/screens/sign_in.dart';
 import 'package:prempranay/util.dart';
 
@@ -14,11 +17,36 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+// var querysnap;
+
+//   @override
+//   void initState() {
+//     // TODO: implement initState
+//     super.initState();
+//     fetchFirebaseData();
+//   }
+//    fetchFirebaseData()async{
+//  querysnap =   await FirebaseFirestore.instance.collection("posts")
+//     .where("userId", isEqualTo: FirebaseAuth.instance.currentUser?.uid )
+//     .get();
+
+//     if(querysnap.docs.isNotEmpty){
+
+//       Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileCard()));
+//     }
+
+    
+
+
+//    }
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
+
+  
 
   signUp() async {
     if (nameController.text == "" ||
@@ -47,6 +75,8 @@ class _SignUpState extends State<SignUp> {
       passwordController.text = "";
     });
   }
+//initstate
+
 
   @override
   Widget build(BuildContext context) {
