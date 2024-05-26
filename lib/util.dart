@@ -24,14 +24,17 @@ myTextField(bool textSecure, String hinttext,
   return Flexible(
     child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: TextField(
-        obscureText: textSecure,
-        controller: textEditingController,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: hinttext,
-          filled: true,
-          fillColor: Colors.grey[300],
+      child: Container(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+        child: TextField(
+          obscureText: textSecure,
+          controller: textEditingController,
+          decoration: InputDecoration(
+            border: InputBorder.none,
+            hintText: hinttext,
+            filled: true,
+            fillColor: Colors.grey[300],
+          ),
         ),
       ),
     ),
@@ -40,18 +43,26 @@ myTextField(bool textSecure, String hinttext,
 
 //for login/singin button, reusable widget
 myButton(String text, Function call) {
-  return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-      )),
-      onPressed: () {
-        call();
-      },
-      child: Text(
-        text,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ));
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SizedBox(
+      height: 45,
+      width: double.maxFinite,
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5),
+              )),
+          onPressed: () {
+            call();
+          },
+          child: Text(
+            text,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          )),
+    ),
+  );
 }
 
 //for small textbutton below signup or signin buttomn
@@ -93,9 +104,7 @@ showDialogBox(
 //dialog for camera gallery option
 
 showDialogBoxGalCamOpt(BuildContext context, String message,
-VoidCallback cameraCallback, VoidCallback galleryCallBack
-
-) async {
+    VoidCallback cameraCallback, VoidCallback galleryCallBack) async {
   showDialog(
       barrierDismissible: false,
       context: context,
@@ -110,9 +119,7 @@ VoidCallback cameraCallback, VoidCallback galleryCallBack
             children: [
               InkWell(
                 onTap: () {
-
-                galleryCallBack();
-
+                  galleryCallBack();
                 },
                 child: Row(
                   children: [
@@ -129,11 +136,9 @@ VoidCallback cameraCallback, VoidCallback galleryCallBack
               ),
               InkWell(
                 onTap: () {
-
                   cameraCallback();
                   //for camera
                   // pickImageFromCamera(imagePicker, context);
-            
                 },
                 child: Row(
                   children: [

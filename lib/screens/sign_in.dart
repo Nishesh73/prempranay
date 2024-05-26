@@ -33,9 +33,6 @@ class _SignInState extends State<SignIn> {
 //       Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileCard()));
 //     }
 
-    
-
-
 //    }
   final TextEditingController emailController = TextEditingController();
 
@@ -70,14 +67,15 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: myText("Sign In")),
+      // appBar: AppBar(
+      //     automaticallyImplyLeading: false,
+      //     centerTitle: true,
+      //     title: myText("Sign In")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            myText("Sign In"),
             myIcon(Icons.person),
             myTextField(false, "Email", emailController),
             myTextField(true, "Password", passwordController),

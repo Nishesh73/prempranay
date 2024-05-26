@@ -17,7 +17,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-
 // var querysnap;
 
 //   @override
@@ -36,17 +35,12 @@ class _SignUpState extends State<SignUp> {
 //       Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileCard()));
 //     }
 
-    
-
-
 //    }
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
-
-  
 
   signUp() async {
     if (nameController.text == "" ||
@@ -77,18 +71,19 @@ class _SignUpState extends State<SignUp> {
   }
 //initstate
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          title: myText("Sign up")),
+      // appBar: AppBar(
+      //     automaticallyImplyLeading: false,
+      //     centerTitle: true,
+      //     title: myText("Sign up")
+      //     ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            myText("Sign up"),
             myIcon(Icons.person),
             myTextField(false, "User name", nameController),
             myTextField(false, "Email", emailController),

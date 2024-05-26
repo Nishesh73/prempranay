@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -127,7 +126,6 @@ class _ProfileState extends State<Profile> {
         "gender": genderController.text,
         "interest": interestController.text,
         "like": []
-
       });
       setState(() {
         lineaProgress = false;
@@ -167,9 +165,9 @@ class _ProfileState extends State<Profile> {
           .where("userId", isEqualTo: FirebaseAuth.instance.currentUser?.uid)
           .get();
 
-          // querySnapshot.docs != null is redundant and always true., because querySnapshot.docs
-          //is List, very important concept
-          //what we have to check is doc empty or not
+      // querySnapshot.docs != null is redundant and always true., because querySnapshot.docs
+      //is List, very important concept
+      //what we have to check is doc empty or not
 
       if (querySnapshot.docs.isNotEmpty) {
         Navigator.push(
@@ -239,8 +237,9 @@ class _ProfileState extends State<Profile> {
                           color: Colors.black,
                         )))
               ]),
-              Text("Log in as $userEmail"??"No email available",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              Text(
+                "Log in as $userEmail" ?? "No email available",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ),
               myTextField(false, "User name", nameController),
               myTextField(false, "age", ageController),
