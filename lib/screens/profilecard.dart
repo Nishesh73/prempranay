@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,80 +20,12 @@ class ProfileCard extends StatefulWidget {
 
 class _ProfileCardState extends State<ProfileCard> {
   QuerySnapshot? querySnapshot;
-
+//track the like of each post/profiles
+// Map<String, bool> likes = {};//empty map not null
   var currentUserPostId;
-  String? matchId;
 
   // int currentIndex = 0; //in listview builder, index will automatically represnet the current
   //index but in cardswiper we have  update the current index
-
-  like(var snap, String postId, String userId) async {
-    try {
-      if (!snap.get("like").contains(currentUserPostId)) {
-        await FirebaseFirestore.instance
-            .collection("posts")
-            .doc(postId)
-            .update({
-          "like": FieldValue.arrayUnion([currentUserPostId])
-        });
-      }
-      print("Fetched current user's post document: $currentUserPostId");
-      //now check if liked user also like currentuser, for that currentuser postId required
-      DocumentSnapshot documentsnapshot = await FirebaseFirestore.instance
-          .collection("posts")
-          .doc(currentUserPostId)
-          .get();
-      //only mutual like creates the match
-      print("like field value is ${documentsnapshot.get("like")}");
-
-      var otherUserlikecurrentUser =
-          documentsnapshot.get("like").contains(postId);
-      //now only if above likes variable true then, create match document
-      //warning here i have to sometime create if document not created then i also have to update,
-      //if already created thens SetOptions(merge: true) is required to update data in exist doc
-      //otherwise somethign went gone wrong
-      // var id = FirebaseFirestore.instance.collection("match").doc().id;
-
-      //here above generate some type of id
-      var currentUserId = FirebaseAuth.instance.currentUser?.uid;
-      List ids = [
-        currentUserId,
-        userId
-      ]; //void function donot return any value that's
-      //why we can't assign the value
-      ids.sort();
-      String matchId = ids.join("-");
-      print("postid of current user? $currentUserPostId");
-
-      print("Does other user like current user? $otherUserlikecurrentUser");
-      print("Creating match with ID: $matchId");
-
-      if (otherUserlikecurrentUser) {
-        FirebaseFirestore.instance.collection("match").doc(matchId).set({
-          "imageurl": currentUserImageUrl,
-          "name": currentUserName,
-          "time": DateTime.now(),
-        }, SetOptions(merge: true));
-      }
-    } catch (e) {
-      showDialogBox(context, true, e.toString());
-    }
-  }
-
-  unlike(snap, String postId) async {
-    try {
-      if (snap.get("like").contains(currentUserPostId)) {
-        await FirebaseFirestore.instance
-            .collection("posts")
-            .doc(postId)
-            .update({
-          "like": FieldValue.arrayRemove([currentUserPostId])
-        });
-      }
-    } catch (e) {
-      showDialogBox(context, true, e.toString());
-    }
-  }
 
 //fetch currentusername url etc
   @override
@@ -113,7 +44,9 @@ class _ProfileCardState extends State<ProfileCard> {
       //explanation here if querysnapshot is null then whole expression is null then false will execute
       //mean function body won't run, if querysnapshot is not null then function body code will run
 
-      var postId = querySnapshot?.docs.first
+      var postId = querySnapshot
+          ?.docs
+          .first //it will retrieves the id of first document
           .id; //this is the postId of current user where every data is
       //stored
       currentUserPostId = postId;
@@ -215,20 +148,20 @@ class _ProfileCardState extends State<ProfileCard> {
                   //error
                   cardsCount: asyncSnap.data!.docs.length,
                   cardBuilder: (context, index, x, y) {
-                    var snap = asyncSnap.data!.docs[index];
+                    var snap = asyncSnap.data!.docs[index]; //each profiles's
                     String postId = snap.get("postId");
                     String userId = snap.get("userId");
-
-                    return ProfileCardWidget(
-                      matchId: matchId,
+                    // bool liked = likes[postId] = false; it will assign false everytime- wrong
+                    // bool isLiked = likes[postId]??false;//initially since map is empty likes[postId
+                    //has no value or null value before updation in like and unlike method]
+                    //initially since likes map is empty when we try to access likes[postid]'s value
+                    //is null because there is no key called postId at the begining
+                    //print more and more on console
+                    // print(isLiked);
+                     return ProfileCardWidget(
                       snap: snap,
-                      like: () {
-                        like(snap, postId, userId); //function call
-                      },
-                      unlike: () {
-                        unlike(snap, postId); //function call
-                      },
-                    );
+
+                     );
                   },
                 ),
               ),
